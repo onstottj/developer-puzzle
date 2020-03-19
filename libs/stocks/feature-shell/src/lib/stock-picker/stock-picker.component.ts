@@ -33,9 +33,9 @@ export class StockPickerComponent implements OnInit {
 
   ngOnInit() {}
 
-  isSymbolInvalid() {
-    let symbolControl = this.stockPickerForm.get('symbol');
-    return !symbolControl.valid && symbolControl.touched;
+  isInvalid(formControlName: string) {
+    let formControl = this.stockPickerForm.get(formControlName);
+    return formControl.touched && formControl.invalid;
   }
 
   selectStock() {

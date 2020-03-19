@@ -28,4 +28,32 @@ describe('StockPickerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('isInvalid()', function () {
+    it('should recognize blank text as invalid', function () {
+      let formControl = component.stockPickerForm.get('symbol');
+      formControl.setValue('');
+      formControl.markAsTouched();
+      expect(component.isInvalid('symbol')).toBeTruthy();
+    });
+
+    it('should ignore untouched form controls', function () {
+      expect(component.isInvalid('symbol')).toBeFalsy();
+    });
+  });
+
+  it('should emit stock and period selections', function () {
+    spyOn(component.select, 'emit');
+    component.stockPickerForm.setValue({
+      symbol: 'AAPL',
+      period: '5y'
+    });
+
+    component.selectStock();
+
+    expect(component.select.emit).toHaveBeenCalledWith({
+      symbol: 'AAPL',
+      period: '5y'
+    });
+  });
 });

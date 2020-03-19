@@ -1,4 +1,6 @@
-<form *ngIf="stockPickerForm" [formGroup]="stockPickerForm">
+<form *ngIf="stockPickerForm"
+  [formGroup]="stockPickerForm"
+  (ngSubmit)="selectStock()">
   <mat-form-field>
     <input
       matInput
@@ -7,7 +9,7 @@
       value=""
     />
     <mat-error>
-      <span *ngIf="isSymbolInvalid()"> Please enter a symbol </span>
+      <span *ngIf="isInvalid('symbol')"> Please enter a symbol </span>
     </mat-error>
   </mat-form-field>
 
@@ -21,7 +23,10 @@
         {{ timePeriod.viewValue }}
       </mat-option>
     </mat-select>
+    <mat-error>
+      <span *ngIf="isInvalid('period')">Please pick a time period</span>
+    </mat-error>
   </mat-form-field>
 
-  <button (click)="selectStock()" mat-raised-button>Go</button>
+  <button mat-raised-button>Go</button>
 </form>
