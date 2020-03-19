@@ -30,7 +30,7 @@ export class StocksComponent implements OnInit {
     type: 'LineChart',
     data: [],
     columnNames: ['period', 'close'],
-    options: {title: `Stock price`, width: '600', height: '400'}
+    options: { title: `Stock price`, width: '600', height: '400' }
   };
 
   constructor(private fb: FormBuilder, private priceQuery: PriceQueryFacade) {
