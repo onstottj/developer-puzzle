@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedUiChartModule } from '@coding-challenge/shared/ui/chart';
 import { SharedUiCustomMaterialModule } from '@coding-challenge/shared/ui/custom-material';
+import { StockPickerComponent } from './stock-picker/stock-picker.component';
 import { StocksComponent } from './stocks/stocks.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedUiChartModule,
     SharedUiCustomMaterialModule
   ],
-  declarations: [StocksComponent]
+  declarations: [StocksComponent, StockPickerComponent]
 })
 export class StocksFeatureShellModule {}
