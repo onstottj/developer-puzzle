@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChartOptions } from '@coding-challenge/shared/ui/chart';
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
 
 @Component({
@@ -24,6 +25,13 @@ export class StocksComponent implements OnInit {
     { viewValue: 'Three months', value: '3m' },
     { viewValue: 'One month', value: '1m' }
   ];
+  chartOptions: ChartOptions = {
+    title: '',
+    type: 'LineChart',
+    data: [],
+    columnNames: ['period', 'close'],
+    options: {title: `Stock price`, width: '600', height: '400'}
+  };
 
   constructor(private fb: FormBuilder, private priceQuery: PriceQueryFacade) {
     this.stockPickerForm = fb.group({
