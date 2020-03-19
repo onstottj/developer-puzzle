@@ -1,6 +1,8 @@
-<form *ngIf="stockPickerForm"
+<form
+  *ngIf="stockPickerForm"
   [formGroup]="stockPickerForm"
-  (ngSubmit)="selectStock()">
+  (ngSubmit)="selectStock()"
+>
   <mat-form-field>
     <input
       matInput

@@ -29,20 +29,20 @@ describe('StockPickerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('isInvalid()', function () {
-    it('should recognize blank text as invalid', function () {
-      let formControl = component.stockPickerForm.get('symbol');
+  describe('isInvalid()', function() {
+    it('should recognize blank text as invalid', function() {
+      const formControl = component.stockPickerForm.get('symbol');
       formControl.setValue('');
       formControl.markAsTouched();
       expect(component.isInvalid('symbol')).toBeTruthy();
     });
 
-    it('should ignore untouched form controls', function () {
+    it('should ignore untouched form controls', function() {
       expect(component.isInvalid('symbol')).toBeFalsy();
     });
   });
 
-  it('should emit stock and period selections', function () {
+  it('should emit stock and period selections', function() {
     spyOn(component.select, 'emit');
     component.stockPickerForm.setValue({
       symbol: 'AAPL',
