@@ -48,4 +48,9 @@ export class StocksComponent implements OnInit {
       this.priceQuery.fetchQuote(symbol, period);
     }
   }
+
+  isSymbolInvalid() {
+    let symbolControl = this.stockPickerForm.get('symbol');
+    return !symbolControl.valid && symbolControl.touched;
+  }
 }
