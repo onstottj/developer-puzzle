@@ -9,9 +9,6 @@ import { StockPickerSelection } from '../stock-picker-selection';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  symbol: string;
-  period: string;
-
   quotes$ = this.priceQuery.priceQueries$;
 
   chartOptions: ChartOptions = {
