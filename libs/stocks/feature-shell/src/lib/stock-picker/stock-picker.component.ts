@@ -33,11 +33,6 @@ export class StockPickerComponent implements OnInit {
 
   ngOnInit() {}
 
-  isInvalid(formControlName: string) {
-    const formControl = this.stockPickerForm.get(formControlName);
-    return formControl.touched && formControl.invalid;
-  }
-
   selectStock() {
     if (this.stockPickerForm.valid) {
       const { symbol, period } = this.stockPickerForm.value;
