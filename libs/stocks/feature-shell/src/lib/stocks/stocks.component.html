@@ -1,9 +1,13 @@
-<coding-challenge-stock-picker
-  (select)="fetchQuote($event)"
-></coding-challenge-stock-picker>
+<section>
+  <coding-challenge-stock-picker
+    (select)="fetchQuote($event)"
+  ></coding-challenge-stock-picker>
+</section>
 
-<coding-challenge-chart
-  *ngIf="(quotes$ | async) as chartData"
-  [options]="chartOptions"
-  [data]="chartData"
-></coding-challenge-chart>
+<section>
+  <coding-challenge-chart
+    *ngIf="(quotes$ | async) as chartData"
+    [options]="chartOptions"
+    [data]="chartData"
+  ></coding-challenge-chart>
+</section>
