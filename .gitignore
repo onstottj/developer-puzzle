@@ -16,6 +16,9 @@
 *.launch
 .settings/
 *.sublime-workspace
-coverage
 
 # IDE - VSCode
+
+# IDE - IntelliJ
+coverage
+*.iml
