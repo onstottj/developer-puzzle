@@ -1,7 +1,6 @@
 <form
   *ngIf="stockPickerForm"
   [formGroup]="stockPickerForm"
-  (ngSubmit)="selectStock()"
 >
   <mat-form-field>
     <input
@@ -26,5 +25,5 @@
     <mat-error> Please pick a time period </mat-error>
   </mat-form-field>
 
-  <button mat-raised-button>Go</button>
+  <button (click)="selectStock()" mat-raised-button>Go</button>
 </form>
