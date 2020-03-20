@@ -9,6 +9,7 @@ import { StockPickerSelection } from '../stock-picker/stock-picker.component';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
+  hasFetched = false;
   quotes$ = this.priceQuery.priceQueries$;
 
   chartOptions: ChartOptions = {
@@ -25,5 +26,6 @@ export class StocksComponent implements OnInit {
 
   fetchQuote({ symbol, period }: StockPickerSelection) {
     this.priceQuery.fetchQuote(symbol, period);
+    this.hasFetched = true;
   }
 }
