@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ChartOptions } from '../chart-options';
 
 @Component({
@@ -9,7 +8,7 @@ import { ChartOptions } from '../chart-options';
 })
 export class ChartComponent {
   @Input() options: ChartOptions;
-  @Input() data$: Observable<Array<Array<string | number>>>;
+  @Input() data: Array<Array<string | number>>;
 
   constructor() {}
 }

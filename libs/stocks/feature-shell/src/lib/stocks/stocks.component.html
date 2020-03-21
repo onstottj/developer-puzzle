@@ -3,6 +3,7 @@
 ></coding-challenge-stock-picker>
 
 <coding-challenge-chart
+  *ngIf="(quotes$ | async) as chartData"
   [options]="chartOptions"
-  [data$]="quotes$"
+  [data]="chartData"
 ></coding-challenge-chart>
