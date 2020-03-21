@@ -5,7 +5,7 @@
 </section>
 
 <section id="resultsSection" *ngIf="hasFetched">
-  <h3>Results</h3>
+  <h3>{{priceQuery.selectedSymbol$ | async}} stock price history</h3>
   <coding-challenge-chart
     *ngIf="(quotes$ | async) as chartData"
     [options]="chartOptions"

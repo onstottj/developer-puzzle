@@ -20,7 +20,7 @@ export class StocksComponent implements OnInit {
     options: { title: `Stock price`, width: '600', height: '400' }
   };
 
-  constructor(private priceQuery: PriceQueryFacade) {}
+  constructor(public priceQuery: PriceQueryFacade) {}
 
   ngOnInit() {}
 
