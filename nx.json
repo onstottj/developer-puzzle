@@ -9,7 +9,10 @@
   },
   "projects": {
     "stocks-data-access-price-query": {
-      "tags": ["type:data-access", "scope:stocks"]
+      "tags": [
+        "type:data-access",
+        "scope:stocks"
+      ]
     },
     "stocks": {
       "tags": []
@@ -18,7 +21,10 @@
       "tags": []
     },
     "stocks-feature-shell": {
-      "tags": ["scope:stocks", "type:feature"]
+      "tags": [
+        "scope:stocks",
+        "type:feature"
+      ]
     },
     "shared-ui-chart": {
       "tags": []
@@ -27,7 +33,9 @@
       "tags": []
     },
     "stocks-api": {
-      "tags": ["platform:server"]
+      "tags": [
+        "platform:server"
+      ]
     },
     "shared-ui-custom-material": {
       "tags": []
