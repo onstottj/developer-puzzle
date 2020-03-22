@@ -24,6 +24,7 @@ export class StocksComponent implements OnInit {
   ngOnInit() {}
 
   fetchQuote({ symbol, period }: StockPickerSelection) {
+    this.priceQuery.selectSymbol(symbol);
     this.priceQuery.fetchQuote(symbol, period);
   }
 }
