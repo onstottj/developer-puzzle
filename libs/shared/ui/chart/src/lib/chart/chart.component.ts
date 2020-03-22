@@ -1,5 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ChartOptions } from '../chart-options';
+
+export interface ChartOptions {
+  title: string;
+  type: string;
+  data: any;
+  columnNames: string[];
+  options: any;
+}
 
 @Component({
   selector: 'coding-challenge-chart',
