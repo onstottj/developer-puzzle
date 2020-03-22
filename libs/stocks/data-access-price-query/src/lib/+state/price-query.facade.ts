@@ -10,10 +10,7 @@ export class PriceQueryFacade {
   selectedSymbol$ = this.store.pipe(select(getSelectedSymbol));
   priceQueries$ = this.store.pipe(
     select(getAllPriceQueries),
-    skip(1),
-    map(priceQueries =>
-      priceQueries.map(priceQuery => [priceQuery.date, priceQuery.close])
-    )
+    skip(1)
   );
 
   constructor(private store: Store<PriceQueryPartialState>) {}

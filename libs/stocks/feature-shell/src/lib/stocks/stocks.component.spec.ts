@@ -6,7 +6,7 @@ import { SharedUiCustomMaterialModule } from '@coding-challenge/shared/ui/custom
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
 import { provideMockStore } from '@ngrx/store/testing';
 import { StockPickerComponent } from '../stock-picker/stock-picker.component';
-
+import { StocksListComponent } from '../stocks-list/stocks-list.component';
 import { StocksComponent } from './stocks.component';
 
 describe('StocksComponent', () => {
@@ -15,7 +15,11 @@ describe('StocksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StocksComponent, StockPickerComponent],
+      declarations: [
+        StocksComponent,
+        StockPickerComponent,
+        StocksListComponent
+      ],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
