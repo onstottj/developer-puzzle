@@ -1,6 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StockPickerSelection } from '../stock-picker-selection';
+
+export interface StockPickerSelection {
+  symbol: string;
+  period: string;
+}
 
 @Component({
   selector: 'coding-challenge-stock-picker',

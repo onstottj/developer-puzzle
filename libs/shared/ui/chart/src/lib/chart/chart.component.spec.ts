@@ -16,7 +16,17 @@ describe('ChartComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChartComponent);
+
     component = fixture.componentInstance;
+    component.options = {
+      title: '',
+      type: 'LineChart',
+      data: [],
+      columnNames: ['period', 'close'],
+      options: {title: `Stock price`, width: '600', height: '400'}
+    };
+    component.data = [];
+
     fixture.detectChanges();
   });
 
