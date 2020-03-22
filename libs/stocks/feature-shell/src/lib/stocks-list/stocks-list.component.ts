@@ -10,9 +10,7 @@ export class StocksListComponent implements OnInit {
   @Input()
   data: PriceForList[];
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

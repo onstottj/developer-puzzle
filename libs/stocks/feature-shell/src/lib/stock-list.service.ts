@@ -35,6 +35,7 @@ export class StockListService {
   }
 
   getAveragePrice(prices: number[]): number {
-    return prices.reduce((previous, current) => previous + current, 0) / prices.length;
+    const total = prices.reduce((previous, current) => previous + current, 0);
+    return total / prices.length;
   }
 }

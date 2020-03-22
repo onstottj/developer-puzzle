@@ -13,14 +13,13 @@ import { StocksComponent } from './stocks/stocks.component';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', pathMatch: 'full', component: StocksComponent}
+      { path: '', pathMatch: 'full', component: StocksComponent }
     ]),
     ReactiveFormsModule,
     SharedUiChartModule,
     SharedUiCustomMaterialModule
   ],
   declarations: [StocksComponent, StockPickerComponent, StocksListComponent],
-  providers: [StockListService],
+  providers: [StockListService]
 })
-export class StocksFeatureShellModule {
-}
+export class StocksFeatureShellModule {}
