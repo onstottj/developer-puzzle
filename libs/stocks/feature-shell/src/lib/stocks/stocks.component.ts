@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
-import { ChartOptions } from '../../../../../shared/ui/chart/src/lib/chart/chart.component';
+import { ChartOptions } from '@coding-challenge/shared/ui/chart';
 import { StockPickerSelection } from '../stock-picker/stock-picker.component';
 
 @Component({
