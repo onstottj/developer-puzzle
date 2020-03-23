@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import moment from 'moment';
-import { PriceQuery } from '../../../data-access-price-query/src/lib/+state/price-query.type';
+import { PriceQuery } from '@coding-challenge/stocks/data-access-price-query';
 
 export interface PriceForList {
   dateLabel: string;

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { PriceQuery } from '../../../data-access-price-query/src/lib/+state/price-query.type';
+import { PriceQuery } from '@coding-challenge/stocks/data-access-price-query';
 import { PriceForList, StockListService } from './stock-list.service';
 
 describe('StockListService', () => {
