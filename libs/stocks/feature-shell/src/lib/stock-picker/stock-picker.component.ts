@@ -1,9 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Moment } from 'moment';
+import { merge, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { StockPickerService } from './stock-picker.service';
 
 export interface StockPickerSelection {
   symbol: string;
-  period: string;
+  fromDate: Moment;
+  toDate: Moment;
 }
 
 @Component({
@@ -11,38 +22,80 @@ export interface StockPickerSelection {
   templateUrl: './stock-picker.component.html',
   styleUrls: ['./stock-picker.component.css']
 })
-export class StockPickerComponent implements OnInit {
+export class StockPickerComponent implements OnInit, OnDestroy {
   @Output()
   select = new EventEmitter<StockPickerSelection>();
 
   stockPickerForm: FormGroup;
+  errorMessage = '';
+  private unsubscribe$ = new Subject();
 
-  timePeriods = [
-    { viewValue: 'All available data', value: 'max' },
-    { viewValue: 'Five years', value: '5y' },
-    { viewValue: 'Two years', value: '2y' },
-    { viewValue: 'One year', value: '1y' },
-    { viewValue: 'Year-to-date', value: 'ytd' },
-    { viewValue: 'Six months', value: '6m' },
-    { viewValue: 'Three months', value: '3m' },
-    { viewValue: 'One month', value: '1m' }
-  ];
+  constructor(
+    private fb: FormBuilder,
+    private stockPickerService: StockPickerService
+  ) {}
 
-  constructor(private fb: FormBuilder) {
-    this.stockPickerForm = fb.group({
+  ngOnInit() {
+    this.createForm();
+    this.listenForInvalidDates();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  createForm() {
+    this.stockPickerForm = this.fb.group({
       symbol: [null, Validators.required],
-      period: [null, Validators.required]
+      fromDate: [null, Validators.required],
+      toDate: [null, Validators.required]
     });
   }
 
-  ngOnInit() {}
+  listenForInvalidDates() {
+    merge(
+      this.stockPickerForm.get('fromDate').valueChanges,
+      this.stockPickerForm.get('toDate').valueChanges
+    )
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.fixInvalidDates());
+  }
+
+  fixInvalidDates() {
+    this.errorMessage = '';
+
+    const fromControl = this.stockPickerForm.get('fromDate');
+    const isFromFixed = this.stockPickerService.fixFutureDate(fromControl);
+    if (isFromFixed) {
+      this.errorMessage +=
+        "The From date can't be in the future; it has been reset to today. ";
+    }
+
+    const toControl = this.stockPickerForm.get('toDate');
+    const isToFixed = this.stockPickerService.fixFutureDate(toControl);
+    if (isToFixed) {
+      this.errorMessage +=
+        "The To date can't be in the future; it has been reset to today. ";
+    }
+
+    const isDateRangeFixed = this.stockPickerService.fixToBeforeFrom(
+      fromControl,
+      toControl
+    );
+    if (isDateRangeFixed) {
+      this.errorMessage +=
+        "From can't be after To, so the To date has been reset to match From. ";
+    }
+  }
 
   selectStock() {
     if (this.stockPickerForm.valid) {
-      const { symbol, period } = this.stockPickerForm.value;
+      const { symbol, fromDate, toDate } = this.stockPickerForm.value;
       this.select.emit({
         symbol,
-        period
+        fromDate,
+        toDate
       });
     }
   }
