@@ -1,38 +1,46 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedUiChartModule } from '@coding-challenge/shared/ui/chart';
 import { SharedUiCustomMaterialModule } from '@coding-challenge/shared/ui/custom-material';
-import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
-import { provideMockStore } from '@ngrx/store/testing';
-import { StockPickerComponent } from '../stock-picker/stock-picker.component';
+import { StockPickerComponent } from './stock-picker.component';
 
-import { StocksComponent } from './stocks.component';
-
-describe('StocksComponent', () => {
-  let component: StocksComponent;
-  let fixture: ComponentFixture<StocksComponent>;
+describe('StockPickerComponent', () => {
+  let component: StockPickerComponent;
+  let fixture: ComponentFixture<StockPickerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StocksComponent, StockPickerComponent],
+      declarations: [StockPickerComponent],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
-        SharedUiChartModule,
         SharedUiCustomMaterialModule
-      ],
-      providers: [PriceQueryFacade, provideMockStore()]
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StocksComponent);
+    fixture = TestBed.createComponent(StockPickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit stock and period selections', function() {
+    spyOn(component.select, 'emit');
+    component.stockPickerForm.setValue({
+      symbol: 'AAPL',
+      period: '5y'
+    });
+
+    component.selectStock();
+
+    expect(component.select.emit).toHaveBeenCalledWith({
+      symbol: 'AAPL',
+      period: '5y'
+    });
   });
 });

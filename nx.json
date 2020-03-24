@@ -36,6 +36,9 @@
       "tags": [
         "platform:server"
       ]
+    },
+    "shared-ui-custom-material": {
+      "tags": []
     }
   }
 }
