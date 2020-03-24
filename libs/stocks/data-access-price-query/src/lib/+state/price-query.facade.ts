@@ -12,6 +12,9 @@ export class PriceQueryFacade {
     select(getAllPriceQueries),
     skip(1)
   );
+  pricesForChart$ = this.priceQueries$.pipe(
+    map(prices => prices.map(priceQuery => [priceQuery.date, priceQuery.close]))
+  );
 
   constructor(private store: Store<PriceQueryPartialState>) {}
 

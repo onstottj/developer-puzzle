@@ -11,12 +11,11 @@ import { StockPickerSelection } from '../stock-picker/stock-picker.component';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  pricesForChart$ = this.priceQuery.priceQueries$.pipe(
-    map(prices => prices.map(priceQuery => [priceQuery.date, priceQuery.close]))
-  );
+  pricesForChart$ = this.priceQuery.pricesForChart$;
   pricesForList$ = this.priceQuery.priceQueries$.pipe(
     map(prices => this.stockListService.getPricesForList(prices))
   );
+  selectedSymbol$ = this.priceQuery.selectedSymbol$;
 
   chartOptions: ChartOptions = {
     title: '',
@@ -33,7 +32,7 @@ export class StocksComponent implements OnInit {
 
   ngOnInit() {}
 
-  fetchQuote({ symbol, period }: StockPickerSelection) {
+  stockSelected({ symbol, period }: StockPickerSelection) {
     this.priceQuery.selectSymbol(symbol);
     this.priceQuery.fetchQuote(symbol, period);
   }
