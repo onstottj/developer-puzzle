@@ -5,6 +5,7 @@
       placeholder="Symbol e.g AAPL"
       formControlName="symbol"
       value=""
+      data-cy="symbolInput"
     />
     <mat-error> Please enter a symbol </mat-error>
   </mat-form-field>
@@ -21,6 +22,4 @@
     </mat-select>
     <mat-error> Please pick a time period </mat-error>
   </mat-form-field>
-
-  <button (click)="selectStock()" mat-raised-button>Go</button>
 </form>

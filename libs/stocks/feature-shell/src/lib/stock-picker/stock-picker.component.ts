@@ -1,5 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { isEqual } from 'lodash-es';
+import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export interface StockPickerSelection {
   symbol: string;
@@ -11,11 +20,12 @@ export interface StockPickerSelection {
   templateUrl: './stock-picker.component.html',
   styleUrls: ['./stock-picker.component.css']
 })
-export class StockPickerComponent implements OnInit {
+export class StockPickerComponent implements OnInit, OnDestroy {
   @Output()
   select = new EventEmitter<StockPickerSelection>();
 
   stockPickerForm: FormGroup;
+  formSubscription: Subscription;
 
   timePeriods = [
     { viewValue: 'All available data', value: 'max' },
@@ -35,7 +45,20 @@ export class StockPickerComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formSubscription = this.stockPickerForm.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged((x, y) => isEqual(x, y))
+      )
+      .subscribe(() => this.selectStock());
+  }
+
+  ngOnDestroy(): void {
+    if (this.formSubscription) {
+      this.formSubscription.unsubscribe();
+    }
+  }
 
   selectStock() {
     if (this.stockPickerForm.valid) {
