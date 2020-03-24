@@ -85,7 +85,7 @@ export class StockPickerComponent implements OnInit, OnDestroy {
     );
     if (isDateRangeFixed) {
       this.errorMessage +=
-        "From can't be after To, so the To date has been reset to match From. ";
+        "The To date can't be before From, so it has been reset to match From. ";
     }
   }
 
