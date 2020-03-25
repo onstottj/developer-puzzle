@@ -5,9 +5,7 @@ import { StocksAppConfig } from '@coding-challenge/stocks/data-access-app-config
 // The list of file replacements can be found in `angular.json`.
 
 export const environment: StocksAppConfig = {
-  production: false,
-  apiKey: 'Tpk_ec3ded92133a4c63bebf9b0388df6f4e',
-  apiURL: 'https://sandbox.iexapis.com'
+  production: false
 };
 
 /*
