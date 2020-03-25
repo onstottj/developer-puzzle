@@ -24,11 +24,7 @@ export class PriceQueryEffects {
       run: (action: FetchPriceQuery, state: PriceQueryPartialState) => {
         const { symbol, period } = action;
         return this.httpClient
-          .get(
-            `http://localhost:3333/stocks/${symbol}/${period}?token=${
-              this.env.apiKey
-            }`
-          )
+          .get(`http://localhost:3333/stocks/${symbol}/${period}`)
           .pipe(
             map(resp => new PriceQueryFetched(resp as PriceQueryResponse[]))
           );
