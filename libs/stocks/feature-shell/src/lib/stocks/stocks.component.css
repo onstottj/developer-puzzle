@@ -1,0 +1,13 @@
+#resultsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+section {
+  margin-bottom: 1em;
+}
+
+.symbol {
+  text-transform: uppercase;
+}

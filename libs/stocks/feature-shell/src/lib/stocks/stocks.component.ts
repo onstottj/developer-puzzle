@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
 import { ChartOptions } from '@coding-challenge/shared/ui/chart';
+import { map } from 'rxjs/operators';
+import { StockListService } from '../stock-list.service';
 import { StockPickerSelection } from '../stock-picker/stock-picker.component';
 
 @Component({
@@ -9,7 +11,11 @@ import { StockPickerSelection } from '../stock-picker/stock-picker.component';
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  quotes$ = this.priceQuery.priceQueries$;
+  pricesForChart$ = this.priceQuery.pricesForChart$;
+  pricesForList$ = this.priceQuery.priceQueries$.pipe(
+    map(prices => this.stockListService.getPricesForList(prices))
+  );
+  selectedSymbol$ = this.priceQuery.selectedSymbol$;
 
   chartOptions: ChartOptions = {
     title: '',
@@ -19,11 +25,15 @@ export class StocksComponent implements OnInit {
     options: { title: `Stock price`, width: '600', height: '400' }
   };
 
-  constructor(private priceQuery: PriceQueryFacade) {}
+  constructor(
+    public priceQuery: PriceQueryFacade,
+    private stockListService: StockListService
+  ) {}
 
   ngOnInit() {}
 
-  fetchQuote({ symbol, period }: StockPickerSelection) {
+  stockSelected({ symbol, period }: StockPickerSelection) {
+    this.priceQuery.selectSymbol(symbol);
     this.priceQuery.fetchQuote(symbol, period);
   }
 }

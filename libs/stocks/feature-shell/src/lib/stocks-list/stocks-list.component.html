@@ -1,0 +1,5 @@
+<ul>
+  <li type="square" *ngFor="let monthlyPrice of data">
+    {{ monthlyPrice.dateLabel }}: {{ monthlyPrice.averagePrice | currency }}
+  </li>
+</ul>

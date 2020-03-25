@@ -1,9 +1,23 @@
 <coding-challenge-stock-picker
-  (select)="fetchQuote($event)"
+  (select)="stockSelected($event)"
 ></coding-challenge-stock-picker>
 
-<coding-challenge-chart
-  *ngIf="(quotes$ | async) as chartData"
-  [options]="chartOptions"
-  [data]="chartData"
-></coding-challenge-chart>
+<section id="resultsSection" *ngIf="(pricesForChart$ | async) as chartData">
+  <h3>
+    <span class="symbol">{{ selectedSymbol$ | async }}</span> price over time
+  </h3>
+  <coding-challenge-chart
+    [options]="chartOptions"
+    [data]="chartData"
+  ></coding-challenge-chart>
+</section>
+
+<section *ngIf="(pricesForList$ | async) as listData">
+  <h3>
+    <span class="symbol">{{ selectedSymbol$ | async }}</span> average price per
+    month
+  </h3>
+  <coding-challenge-stocks-list
+    [data]="listData"
+  ></coding-challenge-stocks-list>
+</section>
