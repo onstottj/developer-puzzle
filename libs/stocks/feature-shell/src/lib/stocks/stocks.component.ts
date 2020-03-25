@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PriceQueryFacade } from '@coding-challenge/stocks/data-access-price-query';
+import { ChartOptions } from '@coding-challenge/shared/ui/chart';
+import {
+  PriceQuery,
+  PriceQueryFacade
+} from '@coding-challenge/stocks/data-access-price-query';
 import { Moment } from 'moment';
 import { combineLatest, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ChartOptions } from '@coding-challenge/shared/ui/chart';
-import { PriceQuery } from '@coding-challenge/stocks/data-access-price-query';
 import { StockPickerSelection } from '../stock-picker/stock-picker.component';
 import { StocksService } from './stocks.service';
 
@@ -26,9 +28,9 @@ export class StocksComponent implements OnInit {
     map(([prices, fromDate, toDate]) => {
       return this.stockService.filterPriceData(prices, fromDate, toDate);
     }),
-    map((prices: PriceQuery[]) => {
-      prices.map(price => [price.date, price.close]);
-    })
+    map((prices: PriceQuery[]) =>
+      prices.map(price => [price.date, price.close])
+    )
   );
 
   chartOptions: ChartOptions = {
