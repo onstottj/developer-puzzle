@@ -5,7 +5,9 @@ import { RouterModule } from '@angular/router';
 import { SharedUiChartModule } from '@coding-challenge/shared/ui/chart';
 import { SharedUiCustomMaterialModule } from '@coding-challenge/shared/ui/custom-material';
 import { StockPickerComponent } from './stock-picker/stock-picker.component';
+import { StockPickerService } from './stock-picker/stock-picker.service';
 import { StocksComponent } from './stocks/stocks.component';
+import { StocksService } from './stocks/stocks.service';
 
 @NgModule({
   imports: [
@@ -17,6 +19,7 @@ import { StocksComponent } from './stocks/stocks.component';
     SharedUiChartModule,
     SharedUiCustomMaterialModule
   ],
-  declarations: [StocksComponent, StockPickerComponent]
+  declarations: [StocksComponent, StockPickerComponent],
+  providers: [StockPickerService, StocksService]
 })
 export class StocksFeatureShellModule {}
