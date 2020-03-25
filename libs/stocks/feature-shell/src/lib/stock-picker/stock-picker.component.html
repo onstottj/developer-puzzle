@@ -15,6 +15,7 @@
       [matDatepicker]="fromDate"
       placeholder="From"
       formControlName="fromDate"
+      [max]="today"
     />
     <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
     <mat-datepicker #fromDate></mat-datepicker>
@@ -27,6 +28,7 @@
       [matDatepicker]="toDate"
       placeholder="To"
       formControlName="toDate"
+      [max]="today"
     />
     <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
     <mat-datepicker #toDate></mat-datepicker>

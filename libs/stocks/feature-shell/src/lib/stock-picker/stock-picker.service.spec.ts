@@ -15,39 +15,6 @@ describe('StockPickerService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('fixFutureDate()', function() {
-    it('should allow dates in the past', function() {
-      const threeDaysAgo = moment().subtract(3, 'day');
-      const control = new FormControl(threeDaysAgo);
-
-      const isFixed = service.fixFutureDate(control);
-
-      expect(isFixed).toBeFalsy();
-      expect(control.value).toBe(threeDaysAgo);
-    });
-
-    it('should allow a date of today', function() {
-      const today = moment();
-      const control = new FormControl(today);
-
-      const isFixed = service.fixFutureDate(control);
-
-      expect(isFixed).toBeFalsy();
-      expect(control.value).toBe(today);
-    });
-
-    it('should fix future dates', function() {
-      const tomorrow = moment().add(1, 'day');
-      const control = new FormControl(tomorrow);
-
-      const isFixed = service.fixFutureDate(control);
-
-      expect(isFixed).toBeTruthy();
-      const today = moment();
-      expect(today.isSame(control.value, 'day')).toBeTruthy();
-    });
-  });
-
   describe('fixToBeforeFrom()', function() {
     it('should allow the To date to be after From', function() {
       const fiveDaysAgo = moment().subtract(5, 'day');

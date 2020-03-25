@@ -6,7 +6,7 @@ import {
   Output
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { StockPickerService } from './stock-picker.service';
@@ -28,6 +28,7 @@ export class StockPickerComponent implements OnInit, OnDestroy {
 
   stockPickerForm: FormGroup;
   errorMessage = '';
+  today = moment();
   private unsubscribe$ = new Subject();
 
   constructor(
@@ -64,27 +65,15 @@ export class StockPickerComponent implements OnInit, OnDestroy {
 
   fixInvalidDates() {
     this.errorMessage = '';
-
     const fromControl = this.stockPickerForm.get('fromDate');
-    const isFromFixed = this.stockPickerService.fixFutureDate(fromControl);
-    if (isFromFixed) {
-      this.errorMessage +=
-        "The From date can't be in the future; it has been reset to today. ";
-    }
-
     const toControl = this.stockPickerForm.get('toDate');
-    const isToFixed = this.stockPickerService.fixFutureDate(toControl);
-    if (isToFixed) {
-      this.errorMessage +=
-        "The To date can't be in the future; it has been reset to today. ";
-    }
 
     const isDateRangeFixed = this.stockPickerService.fixToBeforeFrom(
       fromControl,
       toControl
     );
     if (isDateRangeFixed) {
-      this.errorMessage +=
+      this.errorMessage =
         "The To date can't be before From, so it has been reset to match From. ";
     }
   }
